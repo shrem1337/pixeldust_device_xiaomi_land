@@ -19,10 +19,12 @@ DEVICE_PATH := device/xiaomi/land
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
+# Get the long list of APNs
+PRODUCT_COPY_FILES := device/xiaomi/land/configs/apns-full-conf.xml:system/etc/apns-conf.xml
 # Inherit some common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+#$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from land device
 $(call inherit-product, $(DEVICE_PATH)/device.mk)
@@ -30,15 +32,26 @@ $(call inherit-product, $(DEVICE_PATH)/device.mk)
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := land
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_NAME := lineage_land
+PRODUCT_NAME := pixeldust_land
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 TARGET_VENDOR_PRODUCT_NAME := land
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT=Xiaomi/land/land:6.0.1/MMB29M/V9.2.2.0.MALMIEK:user/release-keys \
-    PRIVATE_BUILD_DESC="land-user 6.0.1 MMB29M V9.2.2.0.MALMIEK release-keys"
+#PRODUCT_BUILD_PROP_OVERRIDES += \
+#    BUILD_FINGERPRINT=Xiaomi/land/land:6.0.1/MMB29M/V9.2.2.0.MALMIEK:user/release-keys \
+#    PRIVATE_BUILD_DESC="land-user 6.0.1 MMB29M V9.2.2.0.MALMIEK release-keys"
 
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
     ro.product.model
+
+#$(call inherit-product, device/xiaomi/land/device.mk)
+$(call inherit-product-if-exists, vendor/xiaomi/land/land-vendor.mk)
+
+PRODUCT_PACKAGES += \
+    Launcher3 \
+    WallpaperPicker
+
+PRODUCT_PACKAGES += \
+    AOSPLinks
+
