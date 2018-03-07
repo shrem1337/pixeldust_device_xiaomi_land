@@ -4,7 +4,7 @@
 common_deps := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 kernel_includes := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
 
-#ifeq ($(call is-vendor-board-platform,QCOM),true)
+ifeq ($(call is-vendor-board-platform,QCOM),true)
 ifeq ($(TARGET_COMPILE_WITH_MSM_KERNEL),true)
     common_deps += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
     kernel_includes += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
